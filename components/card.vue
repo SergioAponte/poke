@@ -1,10 +1,12 @@
 <template>
-    <div class="card_tarjetas">
-        <div class="fondo">
-            <img :src="url" alt="">
-            <p class="name">{{ nombre }}</p>
+    <nuxt-link :to="nombre">
+        <div class="card_tarjetas">
+            <div class="fondo">
+                <img :src="url" alt="">
+                <p class="name">{{ nombre }}</p>
+            </div>
         </div>
-    </div>
+    </nuxt-link>
 </template>
 <script>
 
@@ -25,8 +27,8 @@ export default {
 <style>
 
 .card_tarjetas{
-    height: 300px;
-    width: 250px;
+    height: 400px;
+    width: 350px;
     border: 1px solid;
     background-color: white;
     display: flex;
@@ -52,6 +54,7 @@ img{
 }
 p{
     color: white;
+    font-size: 40px;
 }
 
 </style>

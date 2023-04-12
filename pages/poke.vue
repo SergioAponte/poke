@@ -1,22 +1,31 @@
 <template>
-    <div class="container">
+    <!-- <div class="w-full h-screen bg-indigo-300">
+        <p>asdfwe</p>
+    </div> -->
+    <div class="principal w-full">
         <h1>Poke Dex</h1>
         <main class="contenido">
-            <input id="busqeda" type="text" placeholder="Buscar Pokemon">
-            <div v-for="i in response" :key="i.name">
-                <card :nombre="i.name" :url="i.sprites.front_default"/>
-            </div>
+            <input id="busqeda" type="text" placeholder="Buscar Pokemon" >
+                <div class="main_tarjeta_contenedor">
+                    <div  v-for="i in response" :key="i.name">
+                        <card :nombre="i.name" :url="i.sprites.other.dream_world.front_default"/>
+                    </div>
+                </div>
         </main>
     </div>
 </template>
 <script>
 export default {
-    name: 'IndexPage',
+    name: 'PokePage',
     data(){
         return{
             response:[
             ]
         }
+        // {
+        //     message:''
+        // }
+
     },
     mounted(){
         this.getinfo()
@@ -51,21 +60,28 @@ export default {
     height: 100vh;
     width: 100vw;
 } */
-#__layout{
-    width: 0;
-}
 
-.container{
+.principal{
     width: 100vw;
-    height: 100vh;
+    height: auto;
     border: 1px solid;
     background-color: aqua;
+    position: absolute;
 }
 
 /* .dad{
     display: flex;
     flex-wrap: wrap;
 } */
+
+.main_tarjeta_contenedor{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+}
+
 
 h1{
     width: 90%;
@@ -120,6 +136,9 @@ img{
 p{
     color: white;
 } */
+P{
+    color: white;
+}
 
 
 </style>
