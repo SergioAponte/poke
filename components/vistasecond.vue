@@ -12,6 +12,12 @@
                     <h2>abilities</h2>
                     <p v-for=" i in response.abilities" :key="i.ability.name">{{ i.ability.name }}</p>
                 </div>
+                <div class="imagenes_segundarias">
+                    <img :src="imagenes.back_default" alt="">
+                    <img :src="imagenes.back_shiny" alt="">
+                    <img :src="imagenes.front_shiny" alt="">
+                    <img :src="imagenes.front_default" alt="">
+                </div>
             </div>
         </div>
     </div>
@@ -24,7 +30,8 @@ export default{
         return{
             response:[],
             nombre:this.$route.params.pokesecond,
-            url:''
+            url:'',
+            imagenes:{}
         }
 },
     mounted(){
@@ -37,6 +44,8 @@ export default{
         const {data}= await this.$axios.get(`pokemon/${this.$route.params.pokesecond}`)
         this.response=(data)
         this.url=this.response.sprites.other.dream_world.front_default
+        this.imagenes=this.response.sprites
+
         console.log(this.response)
     },
 }
@@ -46,6 +55,10 @@ export default{
 </script>
 
 <style>
+img{
+    height: 200px;
+    width: 150px;
+}
 p{
     color: black;
 }

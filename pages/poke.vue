@@ -5,7 +5,8 @@
     <div class="principal w-full">
         <h1>Poke Dex</h1>
         <main class="contenido">
-            <input id="busqeda" type="text" placeholder="Buscar Pokemon" >
+            <form action="" @submit.prevent="search" ><input id="busqeda" type="text" placeholder="Buscar Pokemon"  v-model="search"></form>
+            
                 <div class="main_tarjeta_contenedor">
                     <div  v-for="i in response" :key="i.name">
                         <card :nombre="i.name" :url="i.sprites.other.dream_world.front_default"/>
@@ -15,20 +16,20 @@
     </div>
 </template>
 <script>
+
+
 export default {
     name: 'PokePage',
     data(){
         return{
             response:[
-            ]
+            ],
+            // search:''
         }
-        // {
-        //     message:''
-        // }
-
     },
     mounted(){
         this.getinfo()
+        // this.buscar()
     },
     methods:{
         async getinfo(){
@@ -38,6 +39,14 @@ export default {
                 console.log(this.response)
             }
         },
+        // buscar(){
+        //     for(let i=0;i<this.response.length;i++){
+        //         if(this.data[i].name==this.search){
+        //             this.$router.push(`/${this.search}`)
+        //         }
+        //         console.log(this.search)
+        //     }
+        // }
         // props:{
         //     url:{
         //         type:String
