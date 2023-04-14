@@ -1,5 +1,7 @@
 <template>
-    <div class="principal w-full">
+<div>
+    <login v-if="login"/>
+    <div v-else class="principal w-full">
         <h1>Poke Dex</h1>
         <main class="contenido">
             <form action="" @submit.prevent="buscar" >
@@ -10,8 +12,13 @@
                     <card :nombre="i.name" :url="i.sprites.other.dream_world.front_default"/>
                 </div>
             </div>
+            <div class="botones">
+                <button class="atras"><img class="atras" src="../img/arrow-icon-arrows-sign-black-arrows-free-png.webp" alt=""></button>
+                <button @click="next" class="next"><img class="adelante" src="../img/arrow-icon-arrows-sign-black-arrows-free-png.webp" alt=""></button>
+            </div>
         </main>
     </div>
+</div>
 </template>
 <script>
 
@@ -22,7 +29,9 @@ export default {
         return{
             response:[
             ],
-            search:''
+            search:'',
+            contador:1,
+            login:true
         }
     },
     mounted(){
@@ -31,28 +40,39 @@ export default {
     },
     methods:{
         async getinfo(){
-            for(let j=1;j<20;j++){
-            const {data}= await this.$axios.get(`pokemon/${j}`)
-            this.response.push(data)
-            console.log(this.response)
-        };
-        // buscar(){
-        //     for(let i=0;i<this.response.length;i++){
-        //         if(this.data[i].name==this.search){
-        //             this.$router.push(`/${this.search}`)
-        //         }
-        //         console.log(this.search)
-        //     }
-        // }
-        },
+            try{
+                if(this.contador==1){
+                    for(let j=1;j<20;j++){
+                        const {data}= await this.$axios.get(`pokemon/${j}`)
+                        this.response.push(data)
+                        this.login=false
+                    }
+                }else if(this.contador==2){
+                    for(let j=21;j<41;j++){
+                            const {data}= await this.$axios.get(`pokemon/${j}`)
+                            this.response.push(data)
+                        }
+                };
+                // setTimeout(()=>{
+                //     this.login=false
+                // },10000)    
+            }catch(e){
+                console.log('error');
+            }
+    },
         buscar(){
             for(let i=0;i<this.response.length;i++){
-                if(this.data[i].name==this.search){
+                if(this.response[i].name==this.search){
                     this.$router.push(`/${this.search}`)
                 }
-                console.log(this.search)
             }
+        },
+        next(){
+            this.contador++
+            this.getinfo()
+            this.response=[]
         }
+        
     }
 }
 </script>
@@ -102,7 +122,7 @@ h1{
 }
 main{
     width: 100%;
-    height: 90%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -115,37 +135,25 @@ input{
     border-radius: 7px;
     margin-left: 50px;
 }
-/* .tarjetas{
-    height: 300px;
-    width: 250px;
-    border: 1px solid;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-}
-.fondo{
-    height: 95%;
-    width: 95%;
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    border: 1px solid;
-}
-
-img{
-    height: 90%;
-    width: 90%;
-}
-p{
-    color: white;
-} */
 P{
     color: white;
+}
+.botones{
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.botones img{
+    height: auto;
+    width: 60px;
+}
+
+.atras{
+    transform: rotate(88deg);
 }
 
 
