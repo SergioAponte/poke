@@ -29,7 +29,7 @@ export default {
 .card_tarjetas{
     height: 400px;
     width: 350px;
-    border: 1px solid;
+    border: 3px solid  black;
     background-color: white;
     display: flex;
     align-items: center;
@@ -49,8 +49,8 @@ export default {
 }
 
 img{
-    height: 90%;
-    width: 90%;
+    height: 70%;
+    width: 70%;
 }
 p{
     color: white;

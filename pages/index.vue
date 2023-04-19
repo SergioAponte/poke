@@ -1,5 +1,4 @@
 <template>
-<div>
     <login v-if="login"/>
     <div v-else class="principal w-full">
         <h1>Poke Dex</h1>
@@ -13,12 +12,11 @@
                 </div>
             </div>
             <div class="botones">
-                <button class="atras"><img class="atras" src="../img/arrow-icon-arrows-sign-black-arrows-free-png.webp" alt=""></button>
+                <button @click="atras" class="atras"><img class="atras" src="../img/arrow-icon-arrows-sign-black-arrows-free-png.webp" alt=""></button>
                 <button @click="next" class="next"><img class="adelante" src="../img/arrow-icon-arrows-sign-black-arrows-free-png.webp" alt=""></button>
             </div>
         </main>
     </div>
-</div>
 </template>
 <script>
 
@@ -27,8 +25,7 @@ export default {
     name: 'PokePage',
     data(){
         return{
-            response:[
-            ],
+            response:[],
             search:'',
             contador:1,
             login:true
@@ -51,13 +48,33 @@ export default {
                     for(let j=21;j<41;j++){
                             const {data}= await this.$axios.get(`pokemon/${j}`)
                             this.response.push(data)
+                            this.login=false
                         }
-                };
-                // setTimeout(()=>{
-                //     this.login=false
-                // },10000)    
+                }else if(this.contador==3){
+                    for(let j=42;j<60;j++){
+                            const {data}= await this.$axios.get(`pokemon/${j}`)
+                            this.response.push(data)
+                            this.login=false
+                        }
+
+                }else if(this.contenedor==4){
+                    for(let j=61;j<81;j++){
+                            const {data}= await this.$axios.get(`pokemon/${j}`)
+                            this.response.push(data)
+                            this.login=false
+                        }
+                }else{
+                    for(let j=82;j<100;j++){
+                            const {data}= await this.$axios.get(`pokemon/${j}`)
+                            this.response.push(data)
+                            this.login=false
+                        }
+                }
+                setTimeout(()=>{
+                    this.login=false
+                },2000)    
             }catch(e){
-                console.log('error');
+                console.e('error');
             }
     },
         buscar(){
@@ -69,6 +86,11 @@ export default {
         },
         next(){
             this.contador++
+            this.getinfo()
+            this.response=[]
+        },
+        atras(){
+            this.contador--
             this.getinfo()
             this.response=[]
         }
@@ -90,12 +112,13 @@ export default {
     width: 100vw;
     height: auto;
     border: 1px solid;
-    background-color: aqua;
+    background-image: url(../img/DVMT-6OXcAE2rZY.jpg.afab972f972bd7fbd4253bc7aa1cf27f.jpg);
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
 }
 
 
@@ -129,11 +152,13 @@ main{
     padding: 20px 10px;
 }
 input{
-    width: 200px;
-    height: 30px;
+    width: 250px;
+    height: 40px;
     border: 1px solid black;
     border-radius: 7px;
     margin-left: 50px;
+    font-size: 20px;
+    background-color: rgb(252, 252, 209);
 }
 P{
     color: white;

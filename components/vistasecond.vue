@@ -6,7 +6,7 @@
             <div class="cuadro_habilidades">
                 <div class="squirils">
                     <h3 class="status">Status</h3>
-                    <p v-for="i in response.stats"  :key="i.stat.name"  >{{ i.stat.name }}</p>
+                    <p v-for="i in response.stats"  :key="i.stat.name"  >{{ i.stat.name }}:  {{ i.base_stat }}</p>
                 </div>
                 <div class="habilities">
                     <h3>abilities</h3>
@@ -127,6 +127,7 @@ export default{
 
 .habilities p{
     color: black;
+
 }
 
 
@@ -177,5 +178,6 @@ h3{
 p{
     font-size: 30px;
     color: white;
+
 }
 </style>
