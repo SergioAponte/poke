@@ -26,6 +26,7 @@ export default {
     data(){
         return{
             response:[],
+            responsesegundo:[],
             search:'',
             contador:1,
             login:true
@@ -38,6 +39,10 @@ export default {
     methods:{
         async getinfo(){
             try{
+                for(let j=1;j<100;j++){
+                        const {data}= await this.$axios.get(`pokemon/${j}`)
+                        this.responsesegundo.push(data)
+                    }
                 if(this.contador==1){
                     for(let j=1;j<20;j++){
                         const {data}= await this.$axios.get(`pokemon/${j}`)
@@ -79,7 +84,7 @@ export default {
     },
         buscar(){
             for(let i=0;i<this.response.length;i++){
-                if(this.response[i].name==this.search){
+                if(this.responsesegundo.name==this.search){
                     this.$router.push(`/${this.search}`)
                 }
             }
